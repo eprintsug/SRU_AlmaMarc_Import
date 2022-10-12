@@ -39,13 +39,14 @@ More information on Alma's SRU is available at [ExLibris]( https://developers.ex
 
 cfg.d/z_sru.pl 
 
-Contains base URLs of the SRU and catalog instances, query field mapping, order options and further.
+contains base URLs of the SRU and catalog instances, query field mapping, order options and further.
+
 
 cfg.d/z_marc_import.pl
 
-Contains hashes or arrays of hasshes that define the mappings for conversions and filters. Important hashes are:
+contains hashes or arrays of hashes that define the mappings for conversions and filters. Important hashes are:
 
-$c->{marc_import_mappings} 
+`$c->{marc_import_mappings}`
 maps MARC fields / subfields to a method in AlmaMarc.pm that converts the data into a given EPrints field.
 
 General structure (based on an example)
@@ -86,7 +87,7 @@ When field 024_a is identified, marc2doi_pmid is called. marc2doi_pmid itself ca
 
 
 Filter hashes:
-$c->{marcfilter}->{some_filter_name} contains an array of regular expressions, usually to remove superfluous content from a marcvalue. Make sure to encode UTF-8 characters as \x{hexcode} . 
+`$c->{marcfilter}->{some_filter_name}` contains an array of regular expressions, usually to remove superfluous content from a MARC value. Make sure to encode UTF-8 characters as \x{UTF-8 hex code} . 
 
 
 ## Searching
