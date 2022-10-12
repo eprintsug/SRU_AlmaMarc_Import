@@ -69,7 +69,7 @@ $opt # additional options (ind options identified with MARC field)
 ```
 
 
-Sometimes MARC subfields of a given MARC field may have related or interdependent information. AlmaMarc.pm provides an utility method get_marc_subfield that can extract another subfield for the current parsed MARC field (which is stored in the plugin's parameter {currentnode} ).
+Sometimes a MARC field may have several subfields with related or interdependent information. AlmaMarc.pm provides an utility method get_marc_subfield that can extract another subfield for the current parsed MARC field (which is stored in the plugin's parameter {currentnode} ).
 
 E.g. MARC field 024 is used for identifiers of any kind (DOI, PMID, ...). The value of the identifier is 024_a, the kind is defined in 024_2. Only one hash is needed to define the conversion method.
 
