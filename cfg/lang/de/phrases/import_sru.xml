@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE phrases SYSTEM "entities.dtd">
+
+<epp:phrases xmlns="http://www.w3.org/1999/xhtml" xmlns:epp="http://eprints.org/ep3/phrase" xmlns:epc="http://eprints.org/ep3/control">
+  <epp:phrase id="Plugin/Screen/Import/SRU:help">
+    <p>Geben Sie eine Abfrage für swisscovery SLSP ein. Sie können ohne Feldbezeichnungen suchen. Beispiel:</p>
+    <p><span class="ep_form_example">Boente Walter Praxis des Familienrechts 2018</span></p>
+    <p>Oder Sie können die Abfrage mit booleschen Operatoren (AND, OR) und Feldbezeichnungen spezifizieren. Beispiele:</p>
+    <p> <span class="ep_form_example">AU="Boente Walter" AND TI="Praxis des Familienrechts" AND PY=2018</span><br/>
+       <span class="ep_form_example">AU="Boente Walter" AND TI="Praxis des Familienrechts" AND PY&lt;>2018</span> (ohne Publikationsjahr 2018)</p>
+    <p>Gehören mehrere Begriffe zu einem Feld, setzen Sie diese in Anführungszeichen.</p>
+    <p>Wenn nicht anders angegeben, sind die Beziehungen = und all (alle Begriffe müssen übereinstimmen) für die folgenden Felder zulässig.</p>
+    <div class="slsp_help">
+      <table>
+        <tr>
+          <td>
+            AU= Autor*in<br/>
+            TI= Titel<br/>
+            PY= Publikationsjahr (=,&lt;,>,&lt;=,>=,&lt;>, all ,== (exakt))<br/>
+            NA= Namen<br/>
+            CN= Beitragende
+          </td>
+          <td>
+            ID= SLSP ID (Alma ID oder Swisscovery Permalink)<br/>
+            DOI= DOI<br/>
+            ISBN= ISBN<br/>
+            ISSN= ISSN<br/>
+            ORCID= ORCID
+          </td>
+          <td>
+            PB= Verlag<br/>
+            PL= Verlagsort<br/>
+            CO= Land<br/>
+            SE= Reihe
+          </td>
+          <td>
+             DDC = Dewey Dezimal Klassifikation<br/>
+             LA= Sprache<br/>
+             VL= Band<br/>
+             PG= Seite(n)
+          </td>
+        </tr>
+      </table>
+    </div>
+  </epp:phrase>
+  <epp:phrase id="Plugin/Screen/Import/SRU:results">Resultate</epp:phrase>
+  <epp:phrase id="Plugin/Screen/Import/SRU:action_import_single">Importieren</epp:phrase>
+  <epp:phrase id="Plugin/Screen/Import/SRU:duplicates">
+    <strong>Gefundene Duplikate: </strong>
+  </epp:phrase>
+  <epp:phrase id="Plugin/Screen/Import/SRU:type_not_allowed"><strong>Dieser Dokumenttyp darf aufgrund einer UZH-Regelung nicht importiert werden.</strong></epp:phrase>
+  <epp:phrase id="Plugin/Screen/Import/SRU:slsplink">swisscovery Katalogeintrag</epp:phrase>
+  <epp:phrase id="Plugin/Screen/Import/SRU:upload_label"><i class="fa fa-upload"></i> Volltext hochladen</epp:phrase>
+  <epp:phrase id="Plugin/Screen/Import/SRU:results_page_size">Zeige <epc:pin name="n_10"/>, <epc:pin name="n_20"/> oder <epc:pin name="n_50"/> Einträge pro Seite.</epp:phrase>
+  <epp:phrase id="Plugin/Screen/Import/SRU:order_results">Treffer sortieren nach</epp:phrase>
+
+  <!-- Sort options -->
+  <epp:phrase id="Plugin/Screen/Import/SRU:alma.main_pub_date/sort.descending">Publikationsdatum absteigend</epp:phrase>
+  <epp:phrase id="Plugin/Screen/Import/SRU:alma.main_pub_date/sort.ascending">Publikationsdatum aufsteigend</epp:phrase>
+  <epp:phrase id="Plugin/Screen/Import/SRU:alma.creator/sort.ascending">Autor/in aufsteigend</epp:phrase>
+  <epp:phrase id="Plugin/Screen/Import/SRU:alma.title/sort.ascending">Titel aufsteigend</epp:phrase>
+
+  <!-- Status messages, warnings and errors -->
+  <epp:phrase id="Plugin/Screen/Import/SRU:edit_item">Importierten Eintrag bearbeiten</epp:phrase>
+  <epp:phrase id="Plugin/Screen/Import/SRU:import_completed">Import erfolgreich: 1 Dokument hinzugefügt. <epc:pin name="edit"/> oder später in <epc:pin name="inbox"/> bearbeiten.</epp:phrase>
+  <epp:phrase id="Plugin/Screen/Import/SRU:error:not_found">Der swisscovery Katalogeintrag mit der ID <epc:pin name="mms_id"/> wurde nicnt gefunden.</epp:phrase>
+  <epp:phrase id="Plugin/Import/SRU:no_records_found">Es wurden keine Datensätze gefunden. Bitte ändern Sie Ihre Abfrage.</epp:phrase>
+  <epp:phrase id="Plugin/Import/SRU:author_limit">Der Datensatz von swisscovery enthält viele Autoren bzw. Editoren. Der Import wurde auf die ersten <epc:pin name="limit"/> Namen begrenzt; "et al" wurde hinzugefügt. Unter "Deposits verwalten" können Sie später dem importierten Datensatz weitere Namen hinzufügen.</epp:phrase>
+  <epp:phrase id="Plugin/Import/SRU:srw_connect_error">Es konnte keine Verbindung zur SRU/W API hergestellt werden. Bitte kontaktieren Sie die ZORA IT.<br/>HTTP Status <epc:pin name="status"/>.<br/>Abfrage: <epc:pin name="query"/></epp:phrase>
+  <epp:phrase id="Plugin/Import/SRU:srw_error">Die SRU/W Schnittstelle hat einen Diagnosefehler gemeldet: <epc:pin name="diag"/>. Bitte kontaktieren Sie die ZORA IT.</epp:phrase>
+  <epp:phrase id="Plugin/Import/SRU:unhandled_error">Das SLSP Import Plugin ist irgendwie hierher gelangt und kann mit diesem Fehler nicht umgehen. Bitte kontaktieren Sie die ZORA IT.<br/>Abfrage: <epc:pin name="query"/></epp:phrase> 
+
+</epp:phrases>
