@@ -64,7 +64,7 @@ sub input_text_fh
 	my $max = $opts{maxRecords};
 	my $sortby = $opts{sortBy};
 	
-	my $slsp_result = $self->submit_request( $query, $offset, $max, $sortby );
+	my $sru_result = $self->submit_request( $query, $offset, $max, $sortby );
 	
 	my $empty_list = EPrints::List->new(
 		session => $session,
@@ -72,20 +72,20 @@ sub input_text_fh
 		ids => []
 	);
 	
-	if ($slsp_result->{status} ne "ok")
+	if ($sru_result->{status} ne "ok")
 	{
-		print STDERR "SRU query failed. HTTP Status " . $slsp_result->{rc} . "\n";
+		print STDERR "SRU query failed. HTTP Status " . $sru_result->{rc} . "\n";
 		$self->handler->message( "error", $self->html_phrase( "srw_connect_error",
-			 status => $self->{session}->make_text( $slsp_result->{rc} ),
+			 status => $self->{session}->make_text( $sru_result->{rc} ),
 			 query => $self->{session}->make_text( $query ),
 		) );
 		
 		return $empty_list;
 	}
 	
-	my $slsp_doc = $self->parse_slsp_response( $slsp_result->{content} );
+	my $sru_doc = $self->parse_sru_response( $sru_result->{content} );
 		
-	my $diagnosticsNodes = $slsp_doc->findnodes( '/srw:searchRetrieveResponse/srw:diagnostics' );
+	my $diagnosticsNodes = $sru_doc->findnodes( '/srw:searchRetrieveResponse/srw:diagnostics' );
 	if (defined $diagnosticsNodes)
 	{
 		foreach my $diagnosticsNode (@$diagnosticsNodes)
@@ -103,7 +103,7 @@ sub input_text_fh
 		}
 	}
 	 
-	my $recordCountNode = $slsp_doc->findnodes( '/srw:searchRetrieveResponse/srw:numberOfRecords' );
+	my $recordCountNode = $sru_doc->findnodes( '/srw:searchRetrieveResponse/srw:numberOfRecords' );
 	
 	foreach my $node (@$recordCountNode)
 	{ 
@@ -112,11 +112,11 @@ sub input_text_fh
 	
 	if ($self->{total} > 0)
 	{
-		my $sru_recordNodes = $slsp_doc->findnodes( '/srw:searchRetrieveResponse/srw:records//srw:record' );
+		my $sru_recordNodes = $sru_doc->findnodes( '/srw:searchRetrieveResponse/srw:records//srw:record' );
 		
 		foreach my $sru_recordNode (@$sru_recordNodes)
 		{
-			my $marc_recordNodes =  $slsp_doc->findnodes( 'srw:recordData', $sru_recordNode);
+			my $marc_recordNodes =  $sru_doc->findnodes( 'srw:recordData', $sru_recordNode);
 			
 			foreach my $marc_recordNode (@$marc_recordNodes)
 			{
@@ -149,7 +149,7 @@ sub input_text_fh
 }
 
 
-=item $slsp_data = $self->submit_request( $query )
+=item $sru_data = $self->submit_request( $query )
 
 Fetches a response from the SRU API
 
@@ -159,8 +159,8 @@ sub submit_request
 {
 	my ($self, $query, $offset, $max, $sortby) = @_;
 	
-	my $slsp_data = {};
-	$slsp_data->{status} = "-1";
+	my $sru_data = {};
+	$sru_data->{status} = "-1";
 	
 	my $url = $self->param( "baseurl" );
 	
@@ -190,20 +190,20 @@ sub submit_request
 	my $ua = LWP::UserAgent->new;
 	my $response = $ua->request($req);
 	my $rc = $response->code;
-	$slsp_data->{rc} = $rc;
+	$sru_data->{rc} = $rc;
 	
-	return $slsp_data if (200 != $rc);
+	return $sru_data if (200 != $rc);
 	
-	$slsp_data->{status} = "ok";
-	$slsp_data->{content} = $response->content;
+	$sru_data->{status} = "ok";
+	$sru_data->{content} = $response->content;
 		
-	return $slsp_data;
+	return $sru_data;
 }
 
 #
 # Parses the SRU API response and returns an XML document.
 #
-sub parse_slsp_response
+sub parse_sru_response
 {
 	my ($self, $node) = @_;
 	

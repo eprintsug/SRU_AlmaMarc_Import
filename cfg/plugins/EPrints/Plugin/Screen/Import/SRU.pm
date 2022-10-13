@@ -369,17 +369,17 @@ sub render
 	$frag->appendChild( $self->html_phrase( "help" ) );
 
 	my $form = $frag->appendChild( $self->render_form );
-	$form->setAttribute( class => "slsp_input_form" );
-	$form->setAttribute( id => "slsp_form" );
+	$form->setAttribute( class => "sru_input_form" );
+	$form->setAttribute( id => "sru_form" );
 	
-	my $div = $xml->create_element( "div", class => "slsp_search" );
+	my $div = $xml->create_element( "div", class => "sru_search" );
 	$div->appendChild( $self->_render_search_input );
 	$div->appendChild( $self->render_actions ) ;
 	$div->appendChild( $self->_render_action_buttons );
 	
 	$form->appendChild( $div );
 	
-	my $div_order = $xml->create_element( "div", class => "slsp_order" );
+	my $div_order = $xml->create_element( "div", class => "sru_order" );
 	my $order_label = $self->{session}->make_element( "label", class=>"label_tag", for=>"order" );
    	$order_label->appendChild( $self->html_phrase( "order_results" ) );
    	$order_label->appendChild( $self->{session}->make_text( ": " ) );
@@ -462,16 +462,16 @@ sub render_results
 			
 			$cataloglink->appendChild( $self->html_phrase( "slsplink" ));
 			
-			my $citation = $eprint->render_citation( "slsp_result",
+			my $citation = $eprint->render_citation( "sru_result",
 				n => [$n, "INTEGER"],
 				cataloglink => [ $cataloglink, "XHTML" ],
 			);
 			
-			my $row = $xml->create_element( "div", class => "slsp_result_row" );
+			my $row = $xml->create_element( "div", class => "sru_result_row" );
 			
-			my $col1 = $xml->create_element( "div", class => "slsp_result_col import" );
-			my $col2 = $xml->create_element( "div", class => "slsp_result_col citation" );
-			my $col3 = $xml->create_element( "div", class => "slsp_result_col file" );
+			my $col1 = $xml->create_element( "div", class => "sru_result_col import" );
+			my $col2 = $xml->create_element( "div", class => "sru_result_col citation" );
+			my $col3 = $xml->create_element( "div", class => "sru_result_col file" );
 			
 			$col2->appendChild( $citation ); 
 			
@@ -511,12 +511,12 @@ sub render_results
 			
 			    $col1->appendChild( $repo->render_action_buttons(
 					import_single => $self->phrase( "action_import_single" ),
-					_class => "slsp_import",
+					_class => "sru_import",
 				) );
 				
 				my $label = $xml->create_element( "label",
-					for => "slsp_file_upload" . $n,
-					class => "slsp_file_upload btn btn-uzh-prime",
+					for => "sru_file_upload" . $n,
+					class => "sru_file_upload btn btn-uzh-prime",
 				);
 				
 				$label->appendChild( $self->html_phrase( "upload_label" ) ); 
@@ -525,14 +525,14 @@ sub render_results
 				
 				$col3->appendChild( $xml->create_element( "input",
 					name => "file",
-					id => "slsp_file_upload" . $n,
+					id => "sru_file_upload" . $n,
 					file => undef,
 					type => "file",
 				) );
 				
 				my $script = $self->{session}->make_javascript("
 					var j = jQuery.noConflict();
-					j('#slsp_file_upload" . $n . "').change(function() {
+					j('#sru_file_upload" . $n . "').change(function() {
 						var file = this.files[0].name;
 						j(this).prev('label').text(file);
 					});
@@ -588,7 +588,7 @@ sub _render_search_input
 		id => "data",
 		name => "data",
 		maxlength => 255,
-		class => "ep_form_text slsp_input",
+		class => "ep_form_text sru_input",
 		value => $self->{processor}->{data},
 		autofocus => "",
 		required => "",
@@ -614,7 +614,7 @@ sub _render_action_buttons
 		type => "submit",
 		value => $repo->phrase( "lib/searchexpression:action_search" ),
 		name => "_action_test_data",
-		class => "btn btn-uzh-prime slsp_btn",
+		class => "btn btn-uzh-prime sru_btn",
 	);
 	
 	$frag->appendChild( $input );
@@ -649,7 +649,7 @@ sub _render_order_menu
         values => [ @$order_options ],
         default => $default_order,
         labels => \%labels,
-        additional => { id => 'slsp_sortby' },
+        additional => { id => 'sru_sortby' },
 	);
 }
 
@@ -660,9 +660,9 @@ sub _render_form_js
 	my $script = $self->{session}->make_javascript("
 		var j = jQuery.noConflict();
 		j(document).ready(function() {
-  			j('#slsp_sortby').on('change', function() {
-    			var slsp_form = j(this).closest('form');
-    			slsp_form.find('input[type=submit]').click();
+  			j('#sru_sortby').on('change', function() {
+    			var sru_form = j(this).closest('form');
+    			sru_form.find('input[type=submit]').click();
   			});
 		});
 	");
